@@ -17,6 +17,7 @@ type MainAppProps = {
     addTodo: (t: Todo) => void,
     changeTodo: (todos: Todo[]) => void,
 }
+//отступ
 type MainAppState = {
     todoTitle: string
 };
@@ -38,7 +39,15 @@ class Index extends React.Component<MainAppProps, MainAppState> {
         const { todoTitle } = this.state;
         window.allTodosIsDone = true;
 
+        // переменная allTodosIsDone скорее всего часто изменяемая, поэтому можно использовать переменную локально let allTodosIsDone = true;
         this.props.todos.map(t => {
+            /* 
+                if (!t.isDone) {
+                allTodosIsDone = false;
+
+                И использование window не совсем правильное, насколько я знаю, небезопасно
+            }
+            */
             if (!t.isDone) {
                 window.allTodosIsDone = false
             } else {
@@ -52,15 +61,15 @@ class Index extends React.Component<MainAppProps, MainAppState> {
                 <hr/>
                 <InputNewTodo todoTitle={todoTitle} onChange={this.handleTodoTitle} onSubmit={this.handleSubmitTodo}/>
                 {this.props.todos.map((t, idx) => (
-                    <div className={styles.todo} >
+                    <div className={styles.todo} > {/* обязательно добавляем key={idx} */}
                         {t.title}
-                        <UserSelect user={t.user} idx={idx}/>
+                        <UserSelect user={t.user} idx={idx}/> {/* тоже добавляем key */}
                         <Form.Check
                             style={{ marginTop: -8, marginLeft: 5 }}
                             type="checkbox" checked={t.isDone} onChange={(e) => {
                             const changedTodos = this.props.todos.map((t, index) => {
                                 const res = { ...t }
-                                if (index == idx) {
+                                if (index == idx) { // используем === вместо ==
                                     res.isDone = !t.isDone;
                                 }
                                 return res;

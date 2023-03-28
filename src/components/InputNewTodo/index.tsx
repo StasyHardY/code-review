@@ -20,7 +20,17 @@ export class InputNewTodo extends React.Component<InputNewTodoProps, InputNewTod
 
     handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         this.props.onChange(e.target.value);
+        /*  следует добавить this.setState({ value: e.target.value }) ; 
+            для того, чтобы при изменении пропска, значение инпута также обновлялось
+        */
     }
+
+    /* 
+        handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        this.props.onChange(e.target.value);
+        
+    }
+    */
 
     handleKeyDown = (event: React.KeyboardEvent) => {
         if (event.keyCode !== 13) {
@@ -29,14 +39,17 @@ export class InputNewTodo extends React.Component<InputNewTodoProps, InputNewTod
 
         event.preventDefault();
 
-        var val = this.state.value.trim();
+        var val = this.state.value.trim(); // var - устарело и const  в этом случае подходит лучше - const val = this.state.value.trim();
 
-        if (val) {
+        if (val) { 
             this.props.onSubmit({
-                title: this.state.value,
+                title: this.state.value, // если val(ue) это то, что ввел пользователь, то надо изменять title на val - актуальное значение инпута
                 isDone: false,
             });
             this.props.onChange('');
+            /*  так же следует обновить state - this.setState({ value: '' }) 
+                для того, чтобы инпут был пусть для ввода нового значения после добавления предыдущего.
+            */ ;
         }
     }
 

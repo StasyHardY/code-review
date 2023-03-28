@@ -41,6 +41,34 @@ state = initialState, action: TodoActionTypes): TodoState
 
 */
 
+/* 
+  ОБЩИЕ КОММЕНТАРИИ ПО АРХИТЕКТУРЕ
+
+  Я бы сделал следующую структуру
+
+  src
+    components
+      App
+        App.js
+      InputNewTodo
+        InputNewTodo.js
+      MainApp
+        MainApp.js
+      UserSelect
+        UserSelect.js
+    store // разделить экшены и редьюсеры - вроде как правило для архитектуры redux,  в index.js файлах экспортируем все actions/reducers
+      actions
+        index.js
+        todoActions.js
+      reducers
+        index.js
+        todoReducer.js
+      index.js
+        
+
+    еще я бы, конечно, добавил eslint + prettier, без них никуда и настроил кастомно webpack, нравится там копаться, но в таком проекте это не нужно
+*/
+
 export default configureStore({
     reducer: {
         list: (state = {todos: []}, action) => {
