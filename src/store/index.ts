@@ -59,7 +59,7 @@ export default configureStore({
                         todos: state.todos.filter((t: any, index: number) => index !== action.payload),
                     };
                 }
-                case 'CHANGE_TODOS': {
+                case 'CHANGE_TODOS': { /* можно было бы поменять тут change_todos, на update_todos, change говорит о каком то изменении, но о каком именно ? update говорит об обновлении */
                     return {
                         todos: action.payload,
                     };

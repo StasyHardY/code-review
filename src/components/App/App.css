@@ -9,6 +9,7 @@
   font-size: calc(10px + 2vmin);
 }
 
+/* px можно заменить на em, поможет при адаптиве, уберет возможные проблемы масштабирования, хотя конкретно тут вряд-ли они будут */
 .main {
   padding-left: 30px;
   padding-right: 2em;
@@ -19,7 +20,7 @@
   pointer-events: none;
 }
 
-
+/* на моей практике, медиа запросы писались в самом конце файла css*/
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {
     animation: App-logo-spin infinite 20s linear;
